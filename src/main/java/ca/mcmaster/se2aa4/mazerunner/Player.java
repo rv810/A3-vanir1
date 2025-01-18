@@ -1,7 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 public class Player {
     private int[] position;
-=
+
     protected Player(int[] current_position) {
         this.position = current_position;
     }
