@@ -9,10 +9,15 @@ public class Maze {
     private static final Logger logger = LogManager.getLogger();
     private String[][] maze;
     private int[] dimensions;
+    String file;
 
-    protected int[] getDimensions (String fileName) {
+    protected Maze(String fileName) {
+        this.file = fileName;
+    }
+
+    protected void findDimensions () {
         try {    
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             int rows = 0;
             int cols = 0;
@@ -27,15 +32,16 @@ public class Maze {
         } catch (Exception e) {
             logger.warn("/!\\ An error has occured /!\\"); 
         }
-
-        return dimensions;
+        System.out.println("Dimensions: "+ dimensions[0] + dimensions[1]);
     }
 
-    protected void createMaze (String fileName) {
+    protected void createMaze () {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             int current_row = 0;
+            this.findDimensions();
+
             maze = new String[dimensions[0]][dimensions[1]];
 
             while ((line = reader.readLine()) != null) {
@@ -56,11 +62,21 @@ public class Maze {
     }
 
     protected void displayMaze() {
-        for (String[] row : maze) {
-            for (String str : row) {
-              System.out.print(str);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                for (int idx = 0; idx < line.length(); idx++) {
+                    if (line.charAt(idx) == '#') {
+                        System.out.print("WALL ");
+                    } else if (line.charAt(idx) == ' ') {
+                        System.out.print("PASS ");
+                    }
+                }
+                System.out.print(System.lineSeparator());
             }
-            System.out.println();
+        } catch(Exception e) {
+            logger.warn("/!\\ An error has occured /!\\");
         }
     }
 
