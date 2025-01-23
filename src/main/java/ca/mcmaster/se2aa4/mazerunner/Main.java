@@ -23,36 +23,59 @@ public class Main {
         try {
             CommandLine cmd = parser.parse(options, args);
             if (cmd.hasOption("i")) {
+                if (cmd.hasOption("p")) {
+                    logger.info("**** Reading the maze from file " + args[1]);
 
-                logger.info("** Starting Maze Runner");
-    
-                logger.info("**** Reading the maze from file " + args[1]);
+                    Maze maze = new Maze(args[1]);
+                    maze.createMaze();
         
-                Maze maze = new Maze(args[1]);
-                maze.createMaze();
-    
-                maze.displayMaze();
-    
-                logger.info("**** Computing path");
-    
-                PathFinder findPath = new PathFinder(maze);
-    
-                findPath.findStart();
-                findPath.findFinish();
-    
-                String path = findPath.move();
-    
-                if (path.isEmpty()) {
-                    logger.warn("PATH NOT COMPUTED");
-                }
-    
-                else {
-                    System.out.println("Path: "+ path);
-                }
-                
-                logger.info("** End of MazeRunner");
-            }
+                    String inputPath = (args[3]);
 
+                    PathChecker checkPath = new PathChecker(maze, inputPath);
+
+                    logger.info("**** Checking if path is correct");
+
+                    checkPath.findStart();
+                    checkPath.findFinish();
+
+                    boolean is_valid = checkPath.checkPath();
+
+                    if (is_valid) {
+                        System.out.println("correct path");
+                    }
+                    else {
+                        System.out.println("incorrect path");
+                    }
+                }
+
+                else {
+                    logger.info("** Starting Maze Runner");
+    
+                    logger.info("**** Reading the maze from file " + args[1]);
+            
+                    Maze maze = new Maze(args[1]);
+                    maze.createMaze();
+                
+                    logger.info("**** Computing path");
+        
+                    PathFinder findPath = new PathFinder(maze);
+        
+                    findPath.findStart();
+                    findPath.findFinish();
+        
+                    String path = findPath.move();
+        
+                    if (path.isEmpty()) {
+                        logger.warn("PATH NOT COMPUTED");
+                    }
+        
+                    else {
+                        System.out.println("Path: "+ path);
+                    }
+                    
+                    logger.info("** End of MazeRunner");
+                }
+            }
         } catch (ParseException e) {
             System.out.println("Error parsing arguments: " + e.getMessage());
             formatter.printHelp("CommandLineApp", options);

@@ -48,8 +48,10 @@ public class Maze {
                 for (int idx = 0; idx < line.length(); idx++) {
                     if (line.charAt(idx) == '#') {
                         maze[current_row][idx] = "WALL";
+                        System.out.print("WALL ");
                     } else if (line.charAt(idx) == ' ') {
                         maze[current_row][idx] = "PASS";
+                        System.out.print("PASS ");
                     }
                 }
                 System.out.print(System.lineSeparator());
@@ -58,25 +60,6 @@ public class Maze {
 
         } catch (Exception e) {
             logger.warn("/!\\ An error has occured /!\\"); 
-        }
-    }
-
-    protected void displayMaze() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        System.out.print("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
-                        System.out.print("PASS ");
-                    }
-                }
-                System.out.print(System.lineSeparator());
-            }
-        } catch(Exception e) {
-            logger.warn("/!\\ An error has occured /!\\");
         }
     }
 
