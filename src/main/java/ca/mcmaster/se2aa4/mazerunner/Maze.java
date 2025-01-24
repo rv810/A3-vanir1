@@ -32,7 +32,6 @@ public class Maze {
         } catch (Exception e) {
             logger.warn("/!\\ An error has occured /!\\"); 
         }
-        System.out.println("Dimensions: "+ dimensions[0] + dimensions[1]);
     }
 
     protected void createMaze () {
