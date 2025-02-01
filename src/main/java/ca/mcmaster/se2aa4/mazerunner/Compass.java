@@ -1,7 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 abstract class Compass {
-    public abstract int[] Forward(int[] position);
-    public abstract String Right();
-    public abstract String Left();
+    abstract int[] Forward(int[] position);
+    abstract String checkForward(String[][] maze, int[] position);
+    abstract String checkRight(String[][] maze, int[] position);
+    abstract String checkLeft(String[][] maze, int[] position);
 }
