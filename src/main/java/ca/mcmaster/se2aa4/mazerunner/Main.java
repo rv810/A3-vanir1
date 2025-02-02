@@ -68,6 +68,10 @@ public class Main {
                     if (path.isEmpty()) {
                         logger.warn("PATH NOT COMPUTED");
                     }
+
+                    else if (path.equals("No way out")) {
+                        logger.warn("NO WAY OUT");
+                    }
         
                     else {
                         System.out.println("Path: "+ path);

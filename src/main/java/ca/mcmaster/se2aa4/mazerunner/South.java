@@ -15,10 +15,30 @@ public class South extends Compass {
         int row = position[0];
         int col = position[1];
 
+        if (maze[row+1][col].equals("PASS")) {
+            return "pass";
+        }
+        return "wall";
+    }
+
+    @Override
+    public String Move(String[][] maze, int[] position) {
+        int row = position[0];
+        int col = position[1];
+
         if (maze[row][col-1].equals("WALL") && maze[row+1][col].equals("PASS")) {
             return "Forward";
         }
-        return "Turn";
+
+        else if (maze[row+1][col].equals("WALL") && (maze[row][col-1].equals("WALL"))) {
+            return "East";
+        }
+
+        else if (maze[row][col-1].equals("PASS")) {
+            return "West";
+        }
+
+        return "No way out";
     }
 
     @Override
@@ -29,7 +49,7 @@ public class South extends Compass {
         if (maze[row+1][col].equals("WALL") && maze[row][col+1].equals("WALL")) {
             return "West";
         }
-        return "Other way";
+        return "Check left";
     }
 
     @Override
@@ -41,6 +61,6 @@ public class South extends Compass {
             return "East";
         }
 
-        return "";
+        return "No way out";
     }
 }
