@@ -22,13 +22,17 @@ public class Main {
 
         try {
             CommandLine cmd = parser.parse(options, args);
+            logger.info("** Starting Maze Runner");
+    
+            logger.info("**** Reading the maze from file " + args[1]);
+    
+            Maze maze = new Maze(args[1]);
+            maze.createMaze();
+
             if (cmd.hasOption("i")) {
                 if (cmd.hasOption("p")) {
-                    logger.info("**** Reading the maze from file " + args[1]);
+                    logger.info("**** Checking if path is correct");
 
-                    Maze maze = new Maze(args[1]);
-                    maze.createMaze();
-        
                     StringBuilder remainingArgs = new StringBuilder();
                     for (int i = 3; i < args.length; i++) {
                         remainingArgs.append(args[i]).append(" ");
@@ -36,8 +40,6 @@ public class Main {
                     String inputPath = remainingArgs.toString();
 
                     PathChecker checkPath = new PathChecker(maze, inputPath);
-
-                    logger.info("**** Checking if path is correct");
 
                     checkPath.findStart();
                     checkPath.findFinish();
@@ -53,13 +55,6 @@ public class Main {
                 }
 
                 else {
-                    logger.info("** Starting Maze Runner");
-    
-                    logger.info("**** Reading the maze from file " + args[1]);
-            
-                    Maze maze = new Maze(args[1]);
-                    maze.createMaze();
-                
                     logger.info("**** Computing path");
         
                     PathFinder findPath = new PathFinder(maze);
