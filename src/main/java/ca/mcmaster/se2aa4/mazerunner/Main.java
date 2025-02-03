@@ -57,7 +57,7 @@ public class Main {
                 else {
                     logger.info("**** Computing path");
         
-                    PathFinder findPath = new PathFinder(maze);
+                    PathFinder findPath = new RightHandPathFinder(maze);
         
                     findPath.findStart();
                     findPath.findFinish();

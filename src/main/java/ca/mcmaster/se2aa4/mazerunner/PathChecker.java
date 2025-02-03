@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class PathChecker extends Path {
     String path;
     int directionIndex;
-    HashMap<Integer, String> directionIndices = new HashMap<>();
+    HashMap<Integer, Compass> directionIndices = new HashMap<>();
     private static final Logger logger = LogManager.getLogger();
     
 
@@ -23,10 +23,10 @@ public class PathChecker extends Path {
 
         this.path = input_path.replaceAll("\\s", "").trim(); //removes all whitespaces in input path
 
-        directionIndices.put(0, "North");
-        directionIndices.put(1, "East");
-        directionIndices.put(2, "South");
-        directionIndices.put(3, "West");
+        directionIndices.put(0, new North());
+        directionIndices.put(1, new East());
+        directionIndices.put(2, new South());
+        directionIndices.put(3, new West());
 
         directionIndex = 1;
     }
@@ -51,7 +51,6 @@ public class PathChecker extends Path {
     protected boolean checkPath() {
         current_position = start_position;
         String can_move;
-        String new_direction;
 
         for (int i=0; i<path.length(); i++) {
             if (path.charAt(i) > 47 && path.charAt(i) < 58) {
@@ -61,9 +60,9 @@ public class PathChecker extends Path {
 
         for (int i=0; i<path.length(); i++) {
             if (path.charAt(i) == 'F') {
-                can_move = direction.checkForward(maze_arr, current_position);
+                can_move = direction.checkInFront(maze_arr, current_position);
                 if (can_move.equals("pass")) {
-                    current_position = direction.Forward(current_position);
+                    current_position = direction.moveForward(current_position);
                 }
                 else {
                     return false;
@@ -71,13 +70,11 @@ public class PathChecker extends Path {
             }
             else if (path.charAt(i) == 'R') {
                 directionIndex = (directionIndex+5) % 4; //Right turn (calculates index for that direction)
-                new_direction = directionIndices.get(directionIndex);
-                direction = directions.get(new_direction);
+                direction = directionIndices.get(directionIndex);
             }
             else if (path.charAt(i) == 'L') {
                 directionIndex = (directionIndex+3) % 4; //Left turn (calculates index for that direction)
-                new_direction = directionIndices.get(directionIndex);
-                direction = directions.get(new_direction);
+                direction = directionIndices.get(directionIndex);
             }
             else {
                 logger.warn("Not a valid direction");

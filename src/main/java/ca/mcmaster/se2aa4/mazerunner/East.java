@@ -3,7 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 public class East extends Compass {
 
     @Override
-    public int[] Forward(int[] position) {
+    public int[] moveForward(int[] position) {
         int row = position[0];
         int col = position[1];
         int[] new_position = {row, col+1};
@@ -11,7 +11,7 @@ public class East extends Compass {
     }
 
     @Override
-    public String checkForward(String[][] maze, int[] position) {
+    public String checkInFront(String[][] maze, int[] position) {
         int row = position[0];
         int col = position[1];
 
@@ -22,22 +22,43 @@ public class East extends Compass {
     }
 
     @Override
-    public String Move(String[][] maze, int[] position) {
+    public String checkForward(String[][] maze, int[] position) {
         int row = position[0];
         int col = position[1];
 
         if (maze[row+1][col].equals("WALL") && maze[row][col+1].equals("PASS")) {
             return "Forward";
         }
+        return "Check left";
+    }
 
-        else if (maze[row][col+1].equals("WALL") && (maze[row+1][col].equals("WALL"))) {
+    @Override
+    public String checkLeft(String[][] maze, int[] position) {
+        int row = position[0];
+        int col = position[1];
+        if (maze[row][col+1].equals("WALL") && (maze[row+1][col].equals("WALL"))) {
             return "North";
         }
+        return "Check right";
+    }
 
-        else if (maze[row+1][col].equals("PASS")) {
+    @Override
+    public String checkRight(String[][] maze, int[] position) {
+        int row = position[0];
+        int col = position[1];
+        if (maze[row+1][col].equals("PASS")) {
             return "South";
         }
-
         return "No way out";
+    }
+
+    @Override
+    public Compass turnLeft() {
+        return new North();
+    }
+
+    @Override
+    public Compass turnRight() {
+        return new South();
     }
 }
