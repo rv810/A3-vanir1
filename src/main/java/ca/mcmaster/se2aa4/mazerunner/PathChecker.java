@@ -21,7 +21,7 @@ public class PathChecker extends Path {
         start_position = super.start_position;
         end_position = super.end_position;
 
-        this.path = input_path;
+        this.path = input_path.replaceAll("\\s", "").trim(); //removes all whitespaces in input path
 
         directionIndices.put(0, "North");
         directionIndices.put(1, "East");
@@ -34,7 +34,6 @@ public class PathChecker extends Path {
     protected String toCanonical(String path) {
         StringBuilder converted_path = new StringBuilder();
 
-        path.replaceAll("\\s", "");
         for (int i=0; i<path.length(); i++) {
             if (path.charAt(i) > 47 && path.charAt(i) < 58) {
                 for (int j=0; j<(path.charAt(i)-'0'); j++) {
@@ -71,12 +70,12 @@ public class PathChecker extends Path {
                 } 
             }
             else if (path.charAt(i) == 'R') {
-                directionIndex = (directionIndex+5) % 4;
+                directionIndex = (directionIndex+5) % 4; //Right turn (calculates index for that direction)
                 new_direction = directionIndices.get(directionIndex);
                 direction = directions.get(new_direction);
             }
             else if (path.charAt(i) == 'L') {
-                directionIndex = (directionIndex+3) % 4;
+                directionIndex = (directionIndex+3) % 4; //Left turn (calculates index for that direction)
                 new_direction = directionIndices.get(directionIndex);
                 direction = directions.get(new_direction);
             }
