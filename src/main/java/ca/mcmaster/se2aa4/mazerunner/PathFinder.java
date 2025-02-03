@@ -29,7 +29,12 @@ public class PathFinder extends Path{
                 counter++;
                 i++;
             }
-            factorizedPath.append(counter).append(currentChar).append(" ");
+            if (counter > 1) {
+                factorizedPath.append(counter).append(currentChar).append(" ");
+            }
+            else {
+                factorizedPath.append(currentChar).append(" ");
+            }
         }
         return factorizedPath.toString();
     }
