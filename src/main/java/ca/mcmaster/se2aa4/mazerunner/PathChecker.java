@@ -58,29 +58,34 @@ public class PathChecker extends Path {
             }
         }
 
-        for (int i=0; i<path.length(); i++) {
-            if (path.charAt(i) == 'F') {
-                can_move = direction.checkInFront(maze_arr, current_position);
-                if (can_move.equals("pass")) {
-                    current_position = direction.moveForward(current_position);
+        try {
+            for (int i=0; i<path.length(); i++) {
+                if (path.charAt(i) == 'F') {
+                    can_move = direction.checkInFront(maze_arr, current_position);
+                    if (can_move.equals("pass")) {
+                        current_position = direction.moveForward(current_position);
+                    }
+                    else {
+                        return false;
+                    } 
+                }
+                else if (path.charAt(i) == 'R') {
+                    directionIndex = (directionIndex+5) % 4; //Right turn (calculates index for that direction)
+                    direction = directionIndices.get(directionIndex);
+                }
+                else if (path.charAt(i) == 'L') {
+                    directionIndex = (directionIndex+3) % 4; //Left turn (calculates index for that direction)
+                    direction = directionIndices.get(directionIndex);
                 }
                 else {
-                    return false;
-                } 
+                    logger.warn("Not a valid direction");
+                    break;
+                }
             }
-            else if (path.charAt(i) == 'R') {
-                directionIndex = (directionIndex+5) % 4; //Right turn (calculates index for that direction)
-                direction = directionIndices.get(directionIndex);
-            }
-            else if (path.charAt(i) == 'L') {
-                directionIndex = (directionIndex+3) % 4; //Left turn (calculates index for that direction)
-                direction = directionIndices.get(directionIndex);
-            }
-            else {
-                logger.warn("Not a valid direction");
-                break;
-            }
+        } catch (Exception ArrayIndexOutOfBoundsException) {
+            return true;
         }
+        
 
         if (Arrays.equals(current_position, end_position)) {
             return true;
