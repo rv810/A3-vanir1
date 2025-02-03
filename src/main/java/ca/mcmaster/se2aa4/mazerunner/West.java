@@ -41,27 +41,4 @@ public class West extends Compass{
 
         return "No way out";
     }
-
-    @Override
-    public String checkRight(String[][] maze, int[] position) {
-        int row = position[0];
-        int col = position[1];
-
-        if (maze[row-1][col].equals("PASS")) {
-            return "North";
-        }
-
-        return "Check left";
-    }
-
-    @Override
-    public String checkLeft(String[][] maze, int[] position) {
-        int row = position[0];
-        int col = position[1];
-
-        if (maze[row][col+1].equals("WALL") && maze[row+1][col].equals("WALL")) {
-            return "South";
-        }
-        return "No way out";
-    }
 }
