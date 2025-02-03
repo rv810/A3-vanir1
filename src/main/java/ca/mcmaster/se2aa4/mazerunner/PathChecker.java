@@ -14,12 +14,8 @@ public class PathChecker extends Path {
     private static final Logger logger = LogManager.getLogger();
     
 
-    protected PathChecker(Maze maze, String input_path) {
-        super(maze);
-
-        current_position = super.current_position;
-        start_position = super.start_position;
-        end_position = super.end_position;
+    protected PathChecker(Maze maze, String startingSide, String input_path) {
+        super(maze, startingSide);
 
         this.path = input_path.replaceAll("\\s", "").trim(); //removes all whitespaces in input path
 
@@ -49,6 +45,9 @@ public class PathChecker extends Path {
     }
 
     protected boolean checkPath() {
+        this.findWestOpening();
+        this.findEastOpening();
+
         current_position = start_position;
         String can_move;
 
@@ -82,7 +81,7 @@ public class PathChecker extends Path {
                     break;
                 }
             }
-        } catch (Exception ArrayIndexOutOfBoundsException) {
+        } catch (Exception ArrayIndexOutOfBoundsException) { //If user continues past the exit, path is stil technically correct
             return true;
         }
         

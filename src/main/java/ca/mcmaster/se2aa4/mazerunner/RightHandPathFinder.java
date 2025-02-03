@@ -3,19 +3,20 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.util.Arrays;
 
 public class RightHandPathFinder extends PathFinder {
-    RightHandPathFinder(Maze maze) {
-        super(maze);
+    RightHandPathFinder(Maze maze, String startingSide) {
+        super(maze, startingSide);
     }
 
-    protected String move() {
+    protected String FindPath() {
         StringBuilder path = new StringBuilder();
         String factorizedPath;
-        int col = start_position[1];
-        int row = start_position[0];
         String forward;
-        char temp;
-        current_position = new int[]{row, col};
         String new_direction;
+
+        this.findWestOpening();
+        this.findEastOpening();
+        current_position = new int[]{start_position[0], start_position[1]};
+
 
         while (!Arrays.equals(current_position, end_position)) {
             new_direction = direction.checkForward(maze_arr, current_position);
@@ -41,7 +42,6 @@ public class RightHandPathFinder extends PathFinder {
                 }
 
                 forward = direction.checkInFront(maze_arr, current_position);
-
                 if (forward.equals("pass")) {
                     current_position = direction.moveForward(current_position);
                     path.append("F");

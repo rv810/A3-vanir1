@@ -20,10 +20,11 @@ public class Main {
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
+        String startingSide = "East"; //Change this to East to start from the East side of the maze
+
         try {
             CommandLine cmd = parser.parse(options, args);
             logger.info("** Starting Maze Runner");
-    
             logger.info("**** Reading the maze from file " + args[1]);
     
             Maze maze = new Maze(args[1]);
@@ -39,11 +40,7 @@ public class Main {
                     }
                     String inputPath = remainingArgs.toString();
 
-                    PathChecker checkPath = new PathChecker(maze, inputPath);
-
-                    checkPath.findStart();
-                    checkPath.findFinish();
-
+                    PathChecker checkPath = new PathChecker(maze, startingSide, inputPath);
                     boolean is_valid = checkPath.checkPath();
 
                     if (is_valid) {
@@ -57,12 +54,8 @@ public class Main {
                 else {
                     logger.info("**** Computing path");
         
-                    PathFinder findPath = new RightHandPathFinder(maze);
-        
-                    findPath.findStart();
-                    findPath.findFinish();
-        
-                    String path = findPath.move();
+                    PathFinder findPath = new RightHandPathFinder(maze, startingSide);
+                    String path = findPath.FindPath();
         
                     if (path.isEmpty()) {
                         logger.warn("PATH NOT COMPUTED");

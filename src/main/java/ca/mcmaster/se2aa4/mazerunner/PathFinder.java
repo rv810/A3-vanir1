@@ -1,19 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.util.HashMap;
-
 public abstract class PathFinder extends Path{
-    HashMap<String, Integer> directionIndices = new HashMap<>();
-
-    PathFinder(Maze maze) {
-        super(maze);
-
-        directionIndices.put("North", 0);
-        directionIndices.put("East", 1);
-        directionIndices.put("South", 2);
-        directionIndices.put("West", 3);
-
-        direction = directions.get("East");
+    PathFinder(Maze maze, String startingSide) {
+        super(maze, startingSide);
     }
 
     protected String factorizedPath(StringBuilder path) {
@@ -38,5 +27,5 @@ public abstract class PathFinder extends Path{
         return factorizedPath.toString();
     }
 
-    protected abstract String move();
+    protected abstract String FindPath();
 }

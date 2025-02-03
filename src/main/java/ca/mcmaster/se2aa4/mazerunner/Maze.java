@@ -15,9 +15,8 @@ public class Maze {
         this.file = fileName;
     }
 
-    protected void findDimensions () {
-        try {    
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+    protected void findDimensions () {    
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             int rows = 0;
             int cols = 0;
@@ -28,15 +27,13 @@ public class Maze {
             }
 
             dimensions = new int[]{rows, cols};
-
         } catch (Exception e) {
-            logger.warn("/!\\ An error has occured /!\\"); 
+            logger.warn("/!\\ An error has occured /!\\" + e.getMessage()); 
         }
     }
 
     protected void createMaze () {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file)) ){
             String line;
             int current_row = 0;
             this.findDimensions();
@@ -61,7 +58,7 @@ public class Maze {
             }
 
         } catch (Exception e) {
-            logger.warn("/!\\ An error has occured /!\\"); 
+            logger.warn("/!\\ An error has occured /!\\" + e.getMessage()); 
         }
     }
 
