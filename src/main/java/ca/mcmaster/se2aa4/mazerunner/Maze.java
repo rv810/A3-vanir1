@@ -44,14 +44,21 @@ public class Maze {
             maze = new String[dimensions[0]][dimensions[1]];
 
             while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        maze[current_row][idx] = "WALL";
-                        System.out.print("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
+                for (int idx = 0; idx < dimensions[1]; idx++) {
+                    if (idx < line.length()) {
+                        if (line.charAt(idx) == '#') {
+                            maze[current_row][idx] = "WALL";
+                            System.out.print("WALL ");
+                        } else if (line.charAt(idx) == ' ') {
+                            maze[current_row][idx] = "PASS";
+                            System.out.print("PASS ");
+                        }
+                    }
+                    else {
                         maze[current_row][idx] = "PASS";
                         System.out.print("PASS ");
                     }
+                    
                 }
                 System.out.print(System.lineSeparator());
                 current_row++;

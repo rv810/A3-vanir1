@@ -73,20 +73,10 @@ public class PathFinder {
         int row = start_position[0];
         String forward;
         current_position = new int[]{row, col};
-        System.out.println("Starting x and y: " + row + col);
         String new_direction;
-
-        if (maze_arr[row][col] == null) {
-            for (int i=0; i<dimensions[1]-1; i++) {
-                path.append("F");
-            }
-            factorizedPath = factorizedPath(path);
-            return factorizedPath;
-        }
 
         while (!Arrays.equals(current_position, end_position)) {
             new_direction = direction.Move(maze_arr, current_position);
-            System.out.println("New dir: " + direction.Move(maze_arr, current_position));
 
             if (new_direction.equals("Forward")) {
                 current_position = direction.Forward(current_position);
@@ -116,10 +106,7 @@ public class PathFinder {
                     current_position = direction.Forward(current_position);
                     path.append("F");
                 }
-                System.out.println("New direction: " + new_direction);
             }
-
-            System.out.println("x: " + current_position[0] + " y: " + current_position[1]);
         }
 
         factorizedPath = factorizedPath(path);
