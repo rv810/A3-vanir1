@@ -12,8 +12,8 @@ public class PathFinder {
     private int[] start_position;
     private int[] end_position;
     Compass direction;
-    Map<String, Compass> directions = new HashMap<>();
-    Map<String, Integer> directionIndices = new HashMap<>();
+    HashMap<String, Compass> directions = new HashMap<>();
+    HashMap<String, Integer> directionIndices = new HashMap<>();
 
     protected PathFinder(Maze maze) {
         this.maze = maze;

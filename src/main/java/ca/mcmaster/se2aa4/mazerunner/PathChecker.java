@@ -1,4 +1,9 @@
 package ca.mcmaster.se2aa4.mazerunner;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Arrays;
+
 public class PathChecker {
     Maze maze;
     String[][] maze_arr;
@@ -7,12 +12,29 @@ public class PathChecker {
     private int[] current_position;
     private int[] start_position;
     private int[] end_position;
+    Compass direction;
+    int directionIndex;
+    HashMap<String, Compass> directions = new HashMap<>();
+    HashMap<Integer, String> directionIndices = new HashMap<>();
 
     protected PathChecker(Maze maze, String input_path) {
         this.maze = maze;
         maze_arr = maze.getMaze();
         dimensions = maze.getDimensions();
         this.path = input_path;
+
+        directions.put("East", new East());
+        directions.put("North", new North());
+        directions.put("South", new South());
+        directions.put("West", new West());
+
+        directionIndices.put(0, "North");
+        directionIndices.put(1, "East");
+        directionIndices.put(2, "South");
+        directionIndices.put(3, "West");
+
+        direction = directions.get("East");
+        directionIndex = 1;
     }
 
     protected void findStart() {
@@ -33,30 +55,52 @@ public class PathChecker {
 
     protected boolean checkPath() {
         current_position = start_position;
-        int current_row = current_position[0];
-        int current_col = current_position[1];
-        boolean valid_path = true;
+        String can_move;
+        String new_direction;
 
-        for (int i=0; i<Character.getNumericValue(path.charAt(0)); i++) {
-            if (path.charAt(1) == 'F') {
-                if (maze_arr[current_row][current_col+1] == "PASS" || maze_arr[current_row][current_col+1] == null) {
-                    valid_path = true;
-                    current_col++;
+        for (int i=0; i<path.length(); i++) {
+            if (path.charAt(i) == 'F') {
+                can_move = direction.checkForward(maze_arr, current_position);
+                if (can_move.equals("pass")) {
+                    current_position = direction.Forward(current_position);
                 }
                 else {
-                    valid_path = false;
-                    break;
+                    return false;
+                } 
+            }
+            else if (path.charAt(i) == 'R') {
+                directionIndex = (directionIndex+5) % 4;
+                new_direction = directionIndices.get(directionIndex);
+                direction = directions.get(new_direction);
+                can_move = direction.checkForward(maze_arr, current_position);
+                if (can_move.equals("pass")) {
+                    current_position = direction.Forward(current_position);
+                    i++;
+                }
+                else {
+                    return false;
                 }
             }
-
-            if (current_row == end_position[0] && current_col == end_position[1]) {
-                valid_path = true;
+            else if (path.charAt(i) == 'L') {
+                directionIndex = (directionIndex+3) % 4;
+                new_direction = directionIndices.get(directionIndex);
+                direction = directions.get(new_direction);
+                can_move = direction.checkForward(maze_arr, current_position);
+                if (can_move.equals("pass")) {
+                    current_position = direction.Forward(current_position);
+                    i++;
+                }
+                else {
+                    return false;
+                }
             }
-            else {
-                valid_path = false;
-            }
-
         }
-        return valid_path;
+
+        if (Arrays.equals(current_position, end_position)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
