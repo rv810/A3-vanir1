@@ -48,19 +48,15 @@ public class Maze {
                     if (idx < line.length()) {
                         if (line.charAt(idx) == '#') {
                             maze[current_row][idx] = "WALL";
-                            System.out.print("WALL ");
                         } else if (line.charAt(idx) == ' ') {
                             maze[current_row][idx] = "PASS";
-                            System.out.print("PASS ");
                         }
                     }
                     else {
                         maze[current_row][idx] = "PASS";
-                        System.out.print("PASS ");
                     }
                     
                 }
-                System.out.print(System.lineSeparator());
                 current_row++;
             }
 

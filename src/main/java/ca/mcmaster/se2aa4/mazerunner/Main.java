@@ -29,7 +29,11 @@ public class Main {
                     Maze maze = new Maze(args[1]);
                     maze.createMaze();
         
-                    String inputPath = (args[3]);
+                    StringBuilder remainingArgs = new StringBuilder();
+                    for (int i = 3; i < args.length; i++) {
+                        remainingArgs.append(args[i]).append(" ");
+                    }
+                    String inputPath = remainingArgs.toString();
 
                     PathChecker checkPath = new PathChecker(maze, inputPath);
 
@@ -81,7 +85,7 @@ public class Main {
                 }
             }
         } catch (ParseException e) {
-            System.out.println("Error parsing arguments: " + e.getMessage());
+            logger.warn("Error parsing arguments: " + e.getMessage());
             formatter.printHelp("CommandLineApp", options);
         }    
     }
