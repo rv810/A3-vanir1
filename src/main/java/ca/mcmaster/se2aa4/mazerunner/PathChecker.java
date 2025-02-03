@@ -1,56 +1,28 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Arrays;
 
-public class PathChecker {
-    Maze maze;
-    String[][] maze_arr;
-    int[] dimensions;
+public class PathChecker extends Path {
     String path;
-    private int[] current_position;
-    private int[] start_position;
-    private int[] end_position;
-    Compass direction;
     int directionIndex;
-    HashMap<String, Compass> directions = new HashMap<>();
     HashMap<Integer, String> directionIndices = new HashMap<>();
 
     protected PathChecker(Maze maze, String input_path) {
-        this.maze = maze;
-        maze_arr = maze.getMaze();
-        dimensions = maze.getDimensions();
-        this.path = input_path;
+        super(maze);
 
-        directions.put("East", new East());
-        directions.put("North", new North());
-        directions.put("South", new South());
-        directions.put("West", new West());
+        current_position = super.current_position;
+        start_position = super.start_position;
+        end_position = super.end_position;
+
+        this.path = input_path;
 
         directionIndices.put(0, "North");
         directionIndices.put(1, "East");
         directionIndices.put(2, "South");
         directionIndices.put(3, "West");
 
-        direction = directions.get("East");
         directionIndex = 1;
-    }
-
-    protected void findStart() {
-        for (int i=0; i<dimensions[0]; i++) {
-            if (maze_arr[i][0] == "PASS" || maze_arr[i][0] == null ) {
-                start_position = new int[]{i, 0};
-            }
-        }
-    }
-
-    protected void findFinish() {
-        for (int i=0; i<dimensions[0]; i++) {
-            if (maze_arr[i][dimensions[1]-1] == "PASS" || maze_arr[i][dimensions[1]-1] == null) {
-                end_position = new int[]{i, dimensions[1]-1};
-            }
-        }
     }
 
     protected String toCanonical(String path) {

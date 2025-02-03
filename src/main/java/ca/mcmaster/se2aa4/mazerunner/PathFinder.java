@@ -2,28 +2,12 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
-public class PathFinder {
-    Maze maze;
-    String[][] maze_arr;
-    int[] dimensions;
-    private int[] current_position;
-    private int[] start_position;
-    private int[] end_position;
-    Compass direction;
-    HashMap<String, Compass> directions = new HashMap<>();
+public class PathFinder extends Path{
     HashMap<String, Integer> directionIndices = new HashMap<>();
 
-    protected PathFinder(Maze maze) {
-        this.maze = maze;
-        maze_arr = maze.getMaze();
-        dimensions = maze.getDimensions();
-
-        directions.put("East", new East());
-        directions.put("North", new North());
-        directions.put("South", new South());
-        directions.put("West", new West());
+    PathFinder(Maze maze) {
+        super(maze);
 
         directionIndices.put("North", 0);
         directionIndices.put("East", 1);
@@ -31,22 +15,6 @@ public class PathFinder {
         directionIndices.put("West", 3);
 
         direction = directions.get("East");
-    }
-
-    protected void findStart() {
-        for (int i=0; i<dimensions[0]; i++) {
-            if ("PASS".equals(maze_arr[i][0]) || maze_arr[i][0] == null ) {
-                start_position = new int[]{i, 0};
-            }
-        }
-    }
-
-    protected void findFinish() {
-        for (int i=0; i<dimensions[0]; i++) {
-            if ("PASS".equals(maze_arr[i][dimensions[1]-1]) || maze_arr[i][dimensions[1]-1] == null) {
-                end_position = new int[]{i, dimensions[1]-1};
-            }
-        }
     }
 
     protected String factorizedPath(StringBuilder path) {
