@@ -1,14 +1,14 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 public class Path {
-    Maze maze;
-    String[][] maze_arr;
-    int[] dimensions;
-    int[] current_position;
-    int[] start_position;
-    int[] end_position;
-    Compass direction;
-    String startingSide;
+    protected Maze maze;
+    protected String[][] maze_arr;
+    protected int[] dimensions;
+    protected int[] current_position;
+    protected int[] start_position;
+    protected int[] end_position;
+    protected Compass direction;
+    protected String startingSide;
 
     Path(Maze maze, String startingSide) {
         this.maze = maze;

@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 
 public class PathChecker extends Path {
-    String path;
-    int directionIndex;
-    HashMap<Integer, Compass> directionIndices = new HashMap<>();
+    protected String path;
+    protected int directionIndex;
+    protected HashMap<Integer, Compass> directionIndices = new HashMap<>();
     private static final Logger logger = LogManager.getLogger();
     
 
@@ -82,7 +82,7 @@ public class PathChecker extends Path {
                 }
             }
         } catch (Exception ArrayIndexOutOfBoundsException) { //If user continues past the exit, path is stil technically correct
-            return true;
+            return false;
         }
         
 

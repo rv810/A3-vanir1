@@ -9,7 +9,7 @@ public class Maze {
     private static final Logger logger = LogManager.getLogger();
     private String[][] maze;
     private int[] dimensions;
-    String file;
+    private String file;
 
     protected Maze(String fileName) {
         this.file = fileName;
