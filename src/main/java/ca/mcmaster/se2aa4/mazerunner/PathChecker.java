@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.util.HashMap;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,21 +8,13 @@ import java.util.Arrays;
 public class PathChecker extends Path {
     protected String path;
     protected int directionIndex;
-    protected HashMap<Integer, Compass> directionIndices = new HashMap<>();
     private static final Logger logger = LogManager.getLogger();
     
 
-    protected PathChecker(Maze maze, String startingSide, String input_path) {
+    protected PathChecker(Maze maze, Direction startingSide, String input_path) {
         super(maze, startingSide);
 
         this.path = input_path.replaceAll("\\s", "").trim(); //removes all whitespaces in input path
-
-        directionIndices.put(0, new North());
-        directionIndices.put(1, new East());
-        directionIndices.put(2, new South());
-        directionIndices.put(3, new West());
-
-        directionIndex = 1;
     }
 
     protected String toCanonical(String path) {
@@ -69,12 +59,10 @@ public class PathChecker extends Path {
                     } 
                 }
                 else if (path.charAt(i) == 'R') {
-                    directionIndex = (directionIndex+5) % 4; //Right turn (calculates index for that direction)
-                    direction = directionIndices.get(directionIndex);
+                    direction = direction.turnRight();
                 }
                 else if (path.charAt(i) == 'L') {
-                    directionIndex = (directionIndex+3) % 4; //Left turn (calculates index for that direction)
-                    direction = directionIndices.get(directionIndex);
+                    direction = direction.turnLeft();
                 }
                 else {
                     logger.warn("Not a valid direction");

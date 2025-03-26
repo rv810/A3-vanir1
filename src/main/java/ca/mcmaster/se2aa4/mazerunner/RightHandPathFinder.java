@@ -3,7 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.util.Arrays;
 
 public class RightHandPathFinder extends PathFinder {
-    RightHandPathFinder(Maze maze, String startingSide) {
+    RightHandPathFinder(Maze maze, Direction startingSide) {
         super(maze, startingSide);
     }
 

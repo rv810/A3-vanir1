@@ -20,7 +20,7 @@ public class Main {
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
-        String startingSide = "West"; //Change this to East to start from the East side of the maze
+        Direction startingSide = Direction.WEST; //Change this to East to start from the East side of the maze
 
         try {
             CommandLine cmd = parser.parse(options, args);

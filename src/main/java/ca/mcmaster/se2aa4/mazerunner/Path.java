@@ -7,10 +7,10 @@ public class Path {
     protected int[] current_position;
     protected int[] start_position;
     protected int[] end_position;
-    protected Compass direction;
-    protected String startingSide;
+    protected Direction direction;
+    protected Direction startingSide;
 
-    Path(Maze maze, String startingSide) {
+    Path(Maze maze, Direction startingSide) {
         this.maze = maze;
         maze_arr = maze.getMaze();
         dimensions = maze.getDimensions();
@@ -20,9 +20,9 @@ public class Path {
     protected void findWestOpening() {
         for (int i=0; i<dimensions[0]; i++) {
             if ("PASS".equals(maze_arr[i][0]) || maze_arr[i][0] == null ) {
-                if (startingSide.equals("West")) {
+                if (startingSide == Direction.WEST) {
                     start_position = new int[]{i, 0};
-                    direction = new East();
+                    direction = Direction.EAST;
                 }
                 else {
                     end_position = new int[]{i, 0};
@@ -34,9 +34,9 @@ public class Path {
     protected void findEastOpening() {
         for (int i=0; i<dimensions[0]; i++) {
             if ("PASS".equals(maze_arr[i][dimensions[1]-1]) || maze_arr[i][dimensions[1]-1] == null) {
-                if (startingSide.equals("East")) {
+                if (startingSide == Direction.EAST) {
                     start_position = new int[]{i, dimensions[1]-1};
-                    direction = new West();
+                    direction = Direction.WEST;
                 }
                 else {
                     end_position = new int[]{i, dimensions[1]-1};
