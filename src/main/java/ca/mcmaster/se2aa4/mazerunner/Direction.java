@@ -52,11 +52,15 @@ public enum Direction {
     }
 
     public String checkForward(String[][] maze, int[] position) {
-        int[] newPos = moveForward(position); // Move in forward direction
-        int row = newPos[0];
-        int col = newPos[1];
+        int[] forwardPos = moveForward(position); // Move in forward direction
+        int forward_row = forwardPos[0];
+        int forward_col = forwardPos[1];
+        Direction rightDirection = turnRight(); // Get the right direction
+        int[] rightPos = rightDirection.moveForward(position); // Move in that direction
+        int right_row = rightPos[0];
+        int right_col = rightPos[1];
     
-        if (maze[row][col].equals("PASS")) {
+        if (maze[forward_row][forward_col].equals("PASS") && maze[right_row][right_col].equals("WALL")) {
             return "Forward";
         }
         return "Check left";
@@ -75,13 +79,16 @@ public enum Direction {
     }
     
     public String checkLeft(String[][] maze, int[] position) {
-        Direction leftDirection = turnLeft(); // Get the left direction
-        int[] leftPos = leftDirection.moveForward(position); // Move in that direction
-        int row = leftPos[0];
-        int col = leftPos[1];
+        int[] forwardPos = moveForward(position);
+        Direction rightDirection = turnRight(); // Get the right direction
+        int[] rightPos = rightDirection.moveForward(position); // Move in that direction
+        int right_row = rightPos[0];
+        int right_col = rightPos[1];
+        int forward_row = forwardPos[0];
+        int forward_col = forwardPos[1];
     
-        if (maze[row][col].equals("PASS")) {
-            return leftDirection.name();
+        if (maze[right_row][right_col].equals("WALL") && maze[forward_row][forward_col].equals("WALL")) {
+            return rightDirection.name();
         }
         return "Check right";
     }

@@ -2,7 +2,12 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class RightHandPathFinder extends PathFinder {
+    private static final Logger logger = LogManager.getLogger();
+
     RightHandPathFinder(Maze maze, Direction startingSide) {
         super(maze, startingSide);
     }
