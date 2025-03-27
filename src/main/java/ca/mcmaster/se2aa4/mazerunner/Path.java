@@ -26,6 +26,7 @@ public class Path {
                 }
                 else {
                     end_position = new int[]{i, 0};
+                    direction = Direction.WEST;
                 }
             }
         }
@@ -40,8 +41,22 @@ public class Path {
                 }
                 else {
                     end_position = new int[]{i, dimensions[1]-1};
+                    direction = Direction.EAST;
                 }
             }
         }
+    }
+
+    //For testing
+    public int[] getStartPosition() {
+        return start_position;
+    }
+
+    public int[] getEndPosition() {
+        return end_position;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

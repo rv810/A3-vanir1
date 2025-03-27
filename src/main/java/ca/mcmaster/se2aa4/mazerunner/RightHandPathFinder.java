@@ -2,18 +2,14 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.Arrays;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class RightHandPathFinder extends PathFinder {
-    private static final Logger logger = LogManager.getLogger();
+    StringBuilder path = new StringBuilder();
 
     RightHandPathFinder(Maze maze, Direction startingSide) {
         super(maze, startingSide);
     }
 
     protected String FindPath() {
-        StringBuilder path = new StringBuilder();
         String factorizedPath;
         String forward;
         String new_direction;

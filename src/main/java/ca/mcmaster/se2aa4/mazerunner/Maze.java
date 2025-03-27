@@ -13,6 +13,7 @@ public class Maze {
 
     protected Maze(String fileName) {
         this.file = fileName;
+        this.findDimensions();
     }
 
     protected void findDimensions () {    
@@ -36,7 +37,6 @@ public class Maze {
         try (BufferedReader reader = new BufferedReader(new FileReader(file)) ){
             String line;
             int current_row = 0;
-            this.findDimensions();
 
             maze = new String[dimensions[0]][dimensions[1]];
 
