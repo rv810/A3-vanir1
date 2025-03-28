@@ -40,35 +40,15 @@ public class Main {
                     }
                     String inputPath = remainingArgs.toString();
 
-                    PathChecker checkPath = new PathChecker(maze, startingSide, inputPath);
-                    boolean is_valid = checkPath.checkPath();
-
-                    if (is_valid) {
-                        System.out.println("correct path");
-                    }
-                    else {
-                        System.out.println("incorrect path");
-                    }
+                    CheckPathCommand checkPath = new CheckPathCommand(maze, startingSide, inputPath);
+                    checkPath.execute();
                 }
 
                 else {
                     logger.info("**** Computing path");
         
-                    PathFinderFactory pathFactory = new RightHandPathFinderFactory();
-                    PathFinder findPath = pathFactory.createPathFinder(maze, startingSide);
-                    String path = findPath.FindPath();
-        
-                    if (path.isEmpty()) {
-                        logger.warn("PATH NOT COMPUTED");
-                    }
-
-                    else if (path.equals("No way out")) {
-                        logger.warn("NO WAY OUT");
-                    }
-        
-                    else {
-                        System.out.println("Path: "+ path);
-                    }
+                    FindPathCommand findPath = new FindPathCommand(maze, startingSide);
+                    findPath.execute();
                     
                     logger.info("** End of MazeRunner");
                 }
