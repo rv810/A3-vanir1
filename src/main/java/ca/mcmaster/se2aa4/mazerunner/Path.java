@@ -10,7 +10,7 @@ public class Path {
     protected Direction direction;
     protected Direction startingSide;
 
-    Path(Maze maze, Direction startingSide) {
+    protected Path(Maze maze, Direction startingSide) {
         this.maze = maze;
         maze_arr = maze.getMaze();
         dimensions = maze.getDimensions();

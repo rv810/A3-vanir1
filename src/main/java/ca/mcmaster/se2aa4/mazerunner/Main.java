@@ -54,7 +54,8 @@ public class Main {
                 else {
                     logger.info("**** Computing path");
         
-                    PathFinder findPath = new RightHandPathFinder(maze, startingSide);
+                    PathFinderFactory pathFactory = new RightHandPathFinderFactory();
+                    PathFinder findPath = pathFactory.createPathFinder(maze, startingSide);
                     String path = findPath.FindPath();
         
                     if (path.isEmpty()) {

@@ -1,7 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 public abstract class PathFinder extends Path{
-    PathFinder(Maze maze, Direction startingSide) {
+    protected PathFinder(Maze maze, Direction startingSide) {
         super(maze, startingSide);
     }
 

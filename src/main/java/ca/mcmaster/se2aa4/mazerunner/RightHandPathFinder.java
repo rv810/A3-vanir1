@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class RightHandPathFinder extends PathFinder {
     StringBuilder path = new StringBuilder();
 
-    RightHandPathFinder(Maze maze, Direction startingSide) {
+    protected RightHandPathFinder(Maze maze, Direction startingSide) {
         super(maze, startingSide);
     }
 
