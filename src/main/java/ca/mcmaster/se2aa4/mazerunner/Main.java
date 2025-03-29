@@ -22,6 +22,8 @@ public class Main {
 
         Direction startingSide = Direction.WEST; //Change this to East to start from the East side of the maze
 
+        RemoteControl remote = new RemoteControl();
+
         try {
             CommandLine cmd = parser.parse(options, args);
             logger.info("** Starting Maze Runner");
@@ -41,14 +43,16 @@ public class Main {
                     String inputPath = remainingArgs.toString();
 
                     CheckPathCommand checkPath = new CheckPathCommand(maze, startingSide, inputPath);
-                    checkPath.execute();
+                    remote.setCommand(checkPath);
+                    remote.PathOperation();
                 }
 
                 else {
                     logger.info("**** Computing path");
         
                     FindPathCommand findPath = new FindPathCommand(maze, startingSide);
-                    findPath.execute();
+                    remote.setCommand(findPath);
+                    remote.PathOperation();
                     
                     logger.info("** End of MazeRunner");
                 }
