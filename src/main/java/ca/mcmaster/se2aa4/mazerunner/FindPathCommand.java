@@ -8,7 +8,7 @@ public class FindPathCommand implements Command {
     Direction startingSide;
     private static final Logger logger = LogManager.getLogger();
 
-    public FindPathCommand(Maze m, Direction side) {
+    FindPathCommand(Maze m, Direction side) {
         this.maze = m;
         this.startingSide = side;
     }

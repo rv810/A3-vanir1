@@ -5,7 +5,7 @@ public class CheckPathCommand implements Command {
     Direction startingSide;
     String inputPath;
 
-    public CheckPathCommand(Maze m, Direction side, String path) {
+    CheckPathCommand(Maze m, Direction side, String path) {
         this.maze = m;
         this.startingSide = side;
         this.inputPath = path;
