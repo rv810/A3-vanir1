@@ -9,7 +9,6 @@ public class PathChecker extends Path {
     protected String path;
     protected int directionIndex;
     private static final Logger logger = LogManager.getLogger();
-    
 
     protected PathChecker(Maze maze, Direction startingSide, String input_path) {
         super(maze, startingSide);
