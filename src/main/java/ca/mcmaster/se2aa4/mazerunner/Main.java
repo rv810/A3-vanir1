@@ -44,7 +44,6 @@ public class Main {
 
                     CheckPathCommand checkPath = new CheckPathCommand(maze, startingSide, inputPath);
                     remote.setCommand(checkPath);
-                    remote.PathOperation();
                 }
 
                 else {
@@ -52,10 +51,9 @@ public class Main {
         
                     FindPathCommand findPath = new FindPathCommand(maze, startingSide);
                     remote.setCommand(findPath);
-                    remote.PathOperation();
-                    
-                    logger.info("** End of MazeRunner");
                 }
+                remote.PathOperation();
+                logger.info("** End of MazeRunner");
             }
         } catch (ParseException e) {
             logger.warn("Error parsing arguments: " + e.getMessage());
