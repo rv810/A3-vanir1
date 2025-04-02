@@ -14,8 +14,8 @@ public class FindPathCommand implements Command {
     }
 
     public void execute() {
-        PathFinderFactory pathFactory = new RightHandPathFinderFactory();
-        PathFinder findPath = pathFactory.createPathFinder(maze, startingSide);
+        PathFinderFactory pathFactory = new PathFinderFactory(maze, startingSide);
+        PathFinder findPath = pathFactory.getPathFinder("RIGHT HAND");
         String path = findPath.FindPath();
 
         if (path.isEmpty()) {
